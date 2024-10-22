@@ -1,14 +1,15 @@
 "use strict";
 
-import {Platform, NativeModules} from "react-native";
+import { Platform, NativeModules, TurboModuleRegistry } from "react-native";
 import packageJson from "./package.json";
-const {MixpanelReactNative} = NativeModules;
-import MixpanelMain from "mixpanel-react-native/javascript/mixpanel-main"
+const MixpanelReactNative = TurboModuleRegistry ? TurboModuleRegistry.get("MixpanelTurboModule") : NativeModules.MixpanelReactNative;
+import MixpanelMain from "./javascript/mixpanel-main"
 
 const DevicePlatform = {
   Unknown: "Unknown",
   Android: "android",
   iOS: "ios",
+  Harmony: "harmony"
 };
 
 const ERROR_MESSAGE = {
@@ -76,7 +77,7 @@ export class Mixpanel {
       this.token,
       this.trackAutomaticEvents,
       optOutTrackingDefault,
-      {...Helper.getMetaData(), ...superProperties},
+      { ...Helper.getMetaData(), ...superProperties },
       serverURL
     );
   }
@@ -721,8 +722,8 @@ export class People {
     value = Array.isArray(value) ? value : [value];
 
     if (DevicePlatform.iOS === Helper.getDevicePlatform()) {
-      this.mixpanelImpl.union(this.token, {[name]: value});
-      this.mixpanelImpl.union(this.token, {[name]: value});
+      this.mixpanelImpl.union(this.token, { [name]: value });
+      this.mixpanelImpl.union(this.token, { [name]: value });
     } else {
       this.mixpanelImpl.union(this.token, name, value);
     }
@@ -943,6 +944,8 @@ class Helper {
         return DevicePlatform.Android;
       case "ios":
         return DevicePlatform.iOS;
+      case "harmony":
+        return DevicePlatform.Harmony;
       default:
         return DevicePlatform.Unknown;
     }

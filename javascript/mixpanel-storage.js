@@ -1,4 +1,4 @@
-import {MixpanelLogger} from "mixpanel-react-native/javascript/mixpanel-logger";
+import {MixpanelLogger} from "./mixpanel-logger";
 
 export class AsyncStorageAdapter {
   constructor(storage) {
