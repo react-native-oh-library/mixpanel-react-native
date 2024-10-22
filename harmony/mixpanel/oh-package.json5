@@ -1,0 +1,13 @@
+{
+  "name": "@react-native-oh-tpl/mixpanel-react-native",
+  "version": "3.0.5",
+  "description": "",
+  "main": "Index.ets",
+  "types": "",
+  "devDependencies": {
+  },
+  "license": "ISC",
+  "dependencies": {
+    "@rnoh/react-native-openharmony": "file:../react-native-openharmony",
+  }
+}

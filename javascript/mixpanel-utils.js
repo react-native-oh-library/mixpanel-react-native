@@ -1,4 +1,4 @@
-import {MixpanelType} from "mixpanel-react-native/javascript/mixpanel-constants";
+import {MixpanelType} from "./mixpanel-constants";
 
 export class SessionMetadata {
   constructor(trackingQueue) {

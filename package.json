@@ -1,7 +1,15 @@
 {
-  "name": "mixpanel-react-native",
-  "version": "3.0.7",
+  "name": "@react-native-oh-tpl/mixpanel-react-native",
+  "version": "3.0.5",
   "description": "Official React Native Tracking Library for Mixpanel Analytics",
+  "files": [
+    "src",
+    "harmony",
+    "javascript",
+    "!harmony/oh_modules",
+    "!harmony/**/build",
+    "!harmony/**/oh_modules"
+  ],
   "main": "index.js",
   "scripts": {
     "test": "jest"
@@ -16,11 +24,11 @@
     "mixpanel",
     "react",
     "native",
-    "ios",
-    "android",
     "analytics",
     "tracking",
-    "sdk"
+    "sdk",
+    "harmony",
+    "react-native"
   ],
   "bugs": {
     "url": "https://github.com/mixpanel/mixpanel-react-native/issues"
@@ -42,6 +50,24 @@
     "react-native": "^0.63.3",
     "react-test-renderer": "16.13.1"
   },
+  "peerDependencies": {
+    "react": "*",
+    "react-native": "*",
+    "mixpanel-react-native":"3.0.5"
+  },
+  "harmony": {
+    "alias": "mixpanel-react-native",
+    "codegenConfig": {
+      "specPaths": [
+        "./src"
+      ]
+    }
+  },
+  "codegenConfig": {
+    "name": "MixpanelTurboModuleSpec",
+    "type": "modules",
+    "jsSrcsDir": "src"
+  },
   "jest": {
     "modulePathIgnorePatterns": [
       "<rootDir>/Samples/"
@@ -59,7 +85,6 @@
     }
   },
   "dependencies": {
-    "@react-native-async-storage/async-storage": "^1.21.0",
-    "uuid": "3.3.2"
+    "mixpanel-react-native":"3.0.5"
   }
 }

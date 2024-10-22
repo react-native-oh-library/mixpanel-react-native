@@ -1,4 +1,4 @@
-import {MixpanelConfig} from "mixpanel-react-native/javascript/mixpanel-config";
+import {MixpanelConfig} from "./mixpanel-config";
 
 export class MixpanelLogger {
   static _shouldLog(token) {

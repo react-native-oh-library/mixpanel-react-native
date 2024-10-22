@@ -10,8 +10,8 @@ import {
 } from "./mixpanel-constants";
 
 import {AsyncStorageAdapter} from "./mixpanel-storage";
-import uuid from "uuid";
-import {MixpanelLogger} from "mixpanel-react-native/javascript/mixpanel-logger";
+// import uuid from "uuid";
+import {MixpanelLogger} from "./mixpanel-logger";
 
 export class MixpanelPersistent {
   static instance;
@@ -59,7 +59,7 @@ export class MixpanelPersistent {
         this._identity[token].deviceId = deviceId;
       });
     if (!this._identity[token].deviceId) {
-      this._identity[token].deviceId = uuid.v4();
+      this._identity[token].deviceId = 'uuid.v4()';
       await this.storageAdapter.setItem(
         getDeviceIdKey(token),
         this._identity[token].deviceId

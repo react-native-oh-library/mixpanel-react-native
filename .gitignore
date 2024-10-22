@@ -48,3 +48,4 @@ logs/
 buck-out/
 \.buckd/
 *.keystore
+oh-package-lock.json5
