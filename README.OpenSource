@@ -1,0 +1,11 @@
+[
+    {
+        "Name": "mixpanel-react-native",
+        "License": "Apache License",
+        "License File": "https://github.com/mixpanel/mixpanel-react-native/blob/master/LICENSE.md",
+        "Version Number": "2.1.2",
+        "Owner" : "xiafeng@huawei.com",
+        "Upstream URL": "https://github.com/mixpanel/mixpanel-react-native",
+        "Description": "Official React Native Tracking Library for Mixpanel Analytics"
+    }
+]
