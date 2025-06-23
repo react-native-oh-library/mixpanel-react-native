@@ -8,6 +8,15 @@
   },
   "license": "ISC",
   "dependencies": {
-    "@rnoh/react-native-openharmony": "file:../react-native-openharmony",
-  }
+    "@rnoh/react-native-openharmony": "../../example/node_modules/react-native-harmony/harmony/react_native_openharmony.har"
+  },
+  "metadata": {
+    "sourceRoots": [
+      "./src/main"
+    ],
+    "debug": true
+  },
+  "compatibleSdkVersion": 12,
+  "compatibleSdkType": "HarmonyOS",
+  "obfuscated": false
 }
