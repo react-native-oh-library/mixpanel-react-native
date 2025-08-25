@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024 Huawei Device Co., Ltd. All rights reserved
+ * Copyright (c) 2024-2025 Huawei Device Co., Ltd. All rights reserved
  * Use of this source code is governed by a MIT license that can be
  * found in the LICENSE file.
  */
@@ -12,7 +12,7 @@ type MixpanelProperties = {[key: string]: MixpanelType};
 
 export interface Spec extends TurboModule {
   // mixpanel api
-  initialize(token: string, trackAutomaticEvents: boolean, optOutTrackingDefault: boolean, metadata: MixpanelProperties, serverURL: string): void;
+  initialize(token: string, trackAutomaticEvents: boolean, optOutTrackingDefault: boolean, metadata: MixpanelProperties, serverURL: string, useGzipCompression: boolean): void;
   setServerURL(token:string, serverURL:string):void;
   setLoggingEnabled(token:string, loggingEnabled:boolean):void;
   setUseIpAddressForGeolocation(token:string, useIpAddressForGeolocation:boolean):void;
@@ -31,7 +31,7 @@ export interface Spec extends TurboModule {
   registerSuperProperties(token: string, properties?: MixpanelType):void;
   registerSuperPropertiesOnce(token: string, properties?: MixpanelType):void;
   unregisterSuperProperty(token: string, propertyName: string):void;
-  getSuperProperties(token: string):Promise<object>;
+  getSuperProperties(token: string):Promise<void>;
   clearSuperProperties(token: string):void;
   timeEvent(token: string, eventName: string):void;
   eventElapsedTime(token: string, eventName: string):Promise<number>;

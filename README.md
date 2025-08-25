@@ -1,6 +1,6 @@
-# @react-native-oh-tpl/mixpanel-react-native
+# @react-native-ohos/mixpanel-react-native
 
-本项目基于 [mixpanel-react-native](https://github.com/mixpanel/mixpanel-react-native)
+本项目基于 [mixpanel-react-native@v3.1.2](https://github.com/mixpanel/mixpanel-react-native/tree/v3.1.2)
 
 ## 文档地址 / Documentation URL
 

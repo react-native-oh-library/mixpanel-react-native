@@ -21,12 +21,13 @@ import deviceInfo from '@ohos.deviceInfo';
 export class MixpanelPersistent {
     static instance;
 
-    static getInstance(storage) {
+    static getInstance(storage, token) {
         if (!MixpanelPersistent.instance) {
             MixpanelPersistent.instance = new MixpanelPersistent(
                 new AsyncStorageAdapter(storage)
             );
-            MixpanelPersistent.initializationCompletePromise = MixpanelPersistent.instance.initializationCompletePromise();
+            MixpanelPersistent.initializationCompletePromise = 
+                MixpanelPersistent.instance.initializationCompletePromise(token);
         }
         return MixpanelPersistent.instance;
     }
@@ -54,14 +55,20 @@ export class MixpanelPersistent {
     }
 
     async loadDeviceId(token) {
-        await this.storageAdapter
-            .getItem(getDeviceIdKey(token))
-            .then((deviceId) => {
-                if (!this._identity[token]) {
-                    this._identity[token] = {};
-                }
-                this._identity[token].deviceId = deviceId;
-            });
+        if (!token) {
+            return;
+        }
+
+        const storageToken = await this.storageAdapter.getItem(
+            getDeviceIdKey(token)
+        );
+
+        if (!this._identity[token]) {
+            this._identity[token] = {};
+        }
+
+        this._identity[token].deviceId = storageToken;
+
         if (!this._identity[token].deviceId) {
             this._identity[token].deviceId = deviceInfo.ODID;
             await this.storageAdapter.setItem(
@@ -161,6 +168,10 @@ export class MixpanelPersistent {
             return null;
         }
         return this._identity[token].userId;
+    }
+
+    isIdentified(token) {
+        return Boolean(this.getUserId(token));
     }
 
     updateUserId(token, userId) {

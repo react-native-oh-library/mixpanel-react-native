@@ -33,7 +33,7 @@ export const MixpanelNetwork = (() => {
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded",
                 },
-                extraData: `data=${JSON.stringify(data)}`,
+                extraData: `data=${encodeURIComponent(JSON.stringify(data))}`,
             });
             if (response.responseCode !== 200) {
                 throw new MixpanelHttpError(
