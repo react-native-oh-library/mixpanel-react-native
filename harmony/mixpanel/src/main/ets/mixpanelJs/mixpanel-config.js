@@ -68,7 +68,7 @@ export class MixpanelConfig {
     getUseIpAddressForGeolocation(token) {
         return (
             (this._config[token] && this._config[token].useIpAddressForGeolocation) ||
-                true
+                false
         );
     }
 

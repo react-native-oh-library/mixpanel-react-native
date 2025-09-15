@@ -5,7 +5,7 @@
  */
 
 import { TurboModule, TurboModuleContext } from '@rnoh/react-native-openharmony/ts';
-import { TM } from "@rnoh/react-native-openharmony/generated/ts";
+import { TM } from "./generated/ts";
 import MixpanelMain from './mixpanelJs/mixpanel-main';
 
 export type MixpanelType = string | number | MixpanelProperties;
@@ -105,7 +105,7 @@ export class MixpanelModule extends TurboModule implements TM.MixpanelTurboModul
     this.mPanelImpl.unregisterSuperProperty(token, propertyName);
   }
 
-  public getSuperProperties(token: string): Promise<unknown> {
+  public getSuperProperties(token: string): Promise<void> {
     return this.mPanelImpl.getSuperProperties(token);
   }
 

@@ -154,10 +154,15 @@ export const MixpanelCore = (storage) => {
     }
   };
 
+  const identifyUserQueue = async (token) => {
+    await MixpanelQueueManager.identifyUserQueue(token);
+  };
+
   return {
     initialize,
     startProcessingQueue,
     addToMixpanelQueue,
     flush,
+    identifyUserQueue,
   };
 };

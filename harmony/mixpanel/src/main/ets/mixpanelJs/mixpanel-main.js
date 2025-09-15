@@ -18,7 +18,7 @@ export default class MixpanelMain {
         this.core = MixpanelCore(storage);
         this.core.initialize(token);
         this.core.startProcessingQueue(token);
-        this.mixpanelPersistent = MixpanelPersistent.getInstance();
+        this.mixpanelPersistent = MixpanelPersistent.getInstance(storage, token);
     }
 
     async initialize(
@@ -35,7 +35,7 @@ export default class MixpanelMain {
             await this.optOutTracking(token);
             return;
         } else {
-            await this.optInTracking(token);
+            await this._setOptedOutTrackingFlag(token, false);
         }
 
         this.setServerURL(token, serverURL);
@@ -129,17 +129,20 @@ export default class MixpanelMain {
     }
 
     async optOutTracking(token) {
-        this.mixpanelPersistent.updateOptedOut(token, true);
-        await this.mixpanelPersistent.persistOptedOut(token);
+        await this._setOptedOutTrackingFlag(token, true);
         MixpanelLogger.log(token, "User has opted out of tracking");
         await this.mixpanelPersistent.reset(token);
     }
 
     async optInTracking(token) {
-        this.mixpanelPersistent.updateOptedOut(token, false);
-        await this.mixpanelPersistent.persistOptedOut(token);
+        await this._setOptedOutTrackingFlag(token, false);
         MixpanelLogger.log(token, "User has opted in to tracking");
         await this.track(token, "$opt_in");
+    }
+
+    async _setOptedOutTrackingFlag(token, optedOut) {
+        this.mixpanelPersistent.updateOptedOut(token, optedOut);
+        await this.mixpanelPersistent.persistOptedOut(token);
     }
 
     hasOptedOutTracking(token) {
@@ -160,6 +163,7 @@ export default class MixpanelMain {
         this.mixpanelPersistent.updateUserId(token, newDistinctId);
         const deviceId = this.mixpanelPersistent.getDeviceId(token);
         await this.mixpanelPersistent.persistIdentity(token);
+        await this.core.identifyUserQueue(token);
         await this.track(token, "$identify", {
             distinctId: newDistinctId,
             $user_id: newDistinctId,
@@ -198,9 +202,8 @@ export default class MixpanelMain {
 
     async registerSuperProperties(token, properties) {
         MixpanelLogger.log(token, `Register super properties:`, properties);
-        const currentSuperProperties = this.mixpanelPersistent.getSuperProperties(
-            token
-        );
+        const currentSuperProperties =
+            this.mixpanelPersistent.getSuperProperties(token);
         MixpanelLogger.log(
             token,
             `Current Super Properties:`,
@@ -221,9 +224,8 @@ export default class MixpanelMain {
 
     async registerSuperPropertiesOnce(token, properties) {
         MixpanelLogger.log(token, `Register super properties once`, properties);
-        const currentSuperProperties = this.mixpanelPersistent.getSuperProperties(
-            token
-        );
+        const currentSuperProperties =
+        this.mixpanelPersistent.getSuperProperties(token);
 
         const updatedSuperProperties = {
             ...properties,
@@ -288,13 +290,16 @@ export default class MixpanelMain {
     }
 
     async sendProfileDataToMixpanel(token, action) {
+        const distinctId = this.mixpanelPersistent.getDistinctId(token);
+        const deviceId = this.mixpanelPersistent.getDeviceId(token);
+        const userId = this.mixpanelPersistent.getUserId(token);
         const profileData = {
             $token: token,
             $time: Date.now(),
             ...action,
-            $distinct_id: this.mixpanelPersistent.getDistinctId(token),
-            $device_id: this.mixpanelPersistent.getDeviceId(token),
-            $user_id: this.mixpanelPersistent.getUserId(token),
+            ...(distinctId != null && { $distinct_id: distinctId }),
+            ...(deviceId != null && { $device_id: deviceId }),
+            ...(userId != null && { $user_id: userId }),
         };
         await this.core.addToMixpanelQueue(token, MixpanelType.USER, profileData);
     }

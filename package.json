@@ -1,6 +1,6 @@
 {
-  "name": "@react-native-oh-tpl/mixpanel-react-native",
-  "version": "3.0.5-0.1.1",
+  "name": "@react-native-ohos/mixpanel-react-native",
+  "version": "3.1.2",
   "description": "Official React Native Tracking Library for Mixpanel Analytics",
   "files": [
     "src",
@@ -18,7 +18,7 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mixpanel/mixpanel-react-native.git"
+    "url": "git+https://github.com/react-native-oh-library/mixpanel-react-native.git"
   },
   "keywords": [
     "mixpanel",
@@ -31,10 +31,10 @@
     "react-native"
   ],
   "bugs": {
-    "url": "https://github.com/mixpanel/mixpanel-react-native/issues"
+    "url": "https://github.com/react-native-oh-library/mixpanel-react-native/issues"
   },
   "TODO": "Change the git URL before publishing on npm",
-  "homepage": "https://github.com/mixpanel/mixpanel-react-native#readme",
+  "homepage": "https://github.com/react-native-oh-library/mixpanel-react-native/tree/br_rnoh0.77#readme",
   "metadata": {
     "mp_lib": "react-native"
   },
@@ -47,21 +47,16 @@
     "jest": "^26.6.3",
     "jest-fetch-mock": "^3.0.3",
     "metro-react-native-babel-preset": "^0.63.0",
-    "react-native": "^0.63.3",
+    "react-native": "0.77.1",
     "react-test-renderer": "16.13.1"
   },
   "peerDependencies": {
     "react": "*",
     "react-native": "*",
-    "mixpanel-react-native":"3.0.5"
+    "mixpanel-react-native":"3.1.2"
   },
   "harmony": {
-    "alias": "mixpanel-react-native",
-    "codegenConfig": {
-      "specPaths": [
-        "./src"
-      ]
-    }
+    "alias": "mixpanel-react-native"
   },
   "codegenConfig": {
     "name": "MixpanelTurboModuleSpec",
@@ -85,6 +80,9 @@
     }
   },
   "dependencies": {
-    "mixpanel-react-native":"3.0.5"
+    "mixpanel-react-native":"3.1.2",
+    "@react-native-async-storage/async-storage": "^1.21.0",
+    "react-native-get-random-values": "^1.9.0",
+    "uuid": "3.3.2"
   }
 }
