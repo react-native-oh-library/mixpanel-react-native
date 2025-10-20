@@ -1,3 +1,7 @@
-# 3.1.2
+# Changelog
+## v3.1.3-rc.1
+pre-release version 3.1.3-rc.1
+
+## 3.1.2
 ## 更新内容
 * refactor: add OpenHarmony support for mixpanel-react-native
