@@ -5,8 +5,9 @@
  */
 
 import { RNPackage, TurboModulesFactory, } from "@rnoh/react-native-openharmony/ts";
+import { RNOHPackage } from "@rnoh/react-native-openharmony";
 import type { TurboModule, TurboModuleContext, } from "@rnoh/react-native-openharmony/ts";
-import { TM } from "@rnoh/react-native-openharmony/generated/ts";
+import { TM } from "./generated/ts";
 import { MixpanelModule } from './MixpanelModule';
 
 class MixpanelModulesFactory extends TurboModulesFactory {
@@ -22,7 +23,7 @@ class MixpanelModulesFactory extends TurboModulesFactory {
   }
 }
 
-export class MixpanelPackage extends RNPackage {
+export class MixpanelPackage extends RNOHPackage {
   createTurboModulesFactory(ctx: TurboModuleContext): TurboModulesFactory {
     return new MixpanelModulesFactory(ctx);
   }

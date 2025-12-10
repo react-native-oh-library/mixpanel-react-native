@@ -1,5 +1,5 @@
 {
-  "name": "@react-native-oh-tpl/mixpanel-react-native",
+  "name": "@react-native-ohos/mixpanel-react-native",
   "version": "3.0.5-0.1.1",
   "description": "Official React Native Tracking Library for Mixpanel Analytics",
   "files": [
@@ -12,7 +12,8 @@
   ],
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "codegen-lib": "react-native codegen-lib-harmony --no-safety-check --npm-package-name mixpanel-react-native --cpp-output-path ./harmony/mixpanel/src/main/cpp/generated --ets-output-path ./harmony/mixpanel/src/main/ets/generated --turbo-modules-spec-paths ./src/NativeMixpanel.ts --arkts-components-spec-paths ./src"
   },
   "author": "Mixpanel",
   "license": "Apache-2.0",
@@ -57,10 +58,11 @@
   },
   "harmony": {
     "alias": "mixpanel-react-native",
-    "codegenConfig": {
-      "specPaths": [
-        "./src"
-      ]
+    "autolinking": {
+      "etsPackageClassName":"MixpanelPackage",
+      "cppPackageClassName":"MixpanelPackage",
+      "cmakeLibraryTargetName": "rnoh_mixpanel", 
+      "ohPackageName": "@react-native-ohos/mixpanel-react-native"
     }
   },
   "codegenConfig": {
