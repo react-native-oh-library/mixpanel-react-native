@@ -1,3 +1,6 @@
+# v3.2.0
+- release v3.2.0
+
 # Changelog
 
 ## 鸿蒙化Log
