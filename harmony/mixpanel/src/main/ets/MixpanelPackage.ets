@@ -4,25 +4,25 @@
  * found in the LICENSE file.
  */
 
-import { RNPackage, TurboModulesFactory, } from "@rnoh/react-native-openharmony/ts";
+import { TurboModulesFactory } from '@rnoh/react-native-openharmony/ts';
 import type { TurboModule, TurboModuleContext, } from "@rnoh/react-native-openharmony/ts";
-import { TM } from "./generated/ts";
 import { MixpanelModule } from './MixpanelModule';
+import { RNOHPackage } from '@rnoh/react-native-openharmony';
 
 class MixpanelModulesFactory extends TurboModulesFactory {
   createTurboModule(name: string): TurboModule | null {
-    if (name === TM.MixpanelTurboModule.NAME) {
+    if (name === "MixpanelTurboModule") {
       return new MixpanelModule(this.ctx);
     }
     return null;
   }
 
   hasTurboModule(name: string): boolean {
-    return name === TM.MixpanelTurboModule.NAME;
+    return name === "MixpanelTurboModule";
   }
 }
 
-export class MixpanelPackage extends RNPackage {
+export class MixpanelPackage extends RNOHPackage {
   createTurboModulesFactory(ctx: TurboModuleContext): TurboModulesFactory {
     return new MixpanelModulesFactory(ctx);
   }
