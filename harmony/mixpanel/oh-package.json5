@@ -1,6 +1,6 @@
 {
   "name": "@react-native-ohos/mixpanel-react-native",
-  "version": "3.2.0",
+  "version": "3.3.0-rc.1",
   "description": "",
   "main": "Index.ets",
   "types": "",
